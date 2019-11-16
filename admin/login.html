@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>大事件-后台登录页</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <!-- 引入bootstrap的css文件 -->
+  <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css" />
+  <!-- 引入jq文件 -->
+  <script src="./libs/jquery-1.12.4.min.js"></script>
+  <!-- 引入bootstrap的js文件 -->
+  <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+  <!-- 引入基地址和接口的拼接 -->
+  <script src="./libs/http.js"></script>
+</head>
+
+<body>
+  <div class="main_wrap">
+    <div class="header">
+      <a href="#" class="logo"><img src="images/logo.png" alt="" /></a>
+      <div class="copyright">
+        CopyRight © 2019 深圳百秀信息技术股份有限公司<br />All Rights Reserved
+      </div>
+    </div>
+
+    <div class="login_form_con">
+      <div class="login_title"></div>
+      <form class="login_form">
+        <i class="iconfont icon-user"></i>
+        <i class="iconfont icon-key"></i>
+        <input type="text" class="input_txt" placeholder="邮箱/手机号" />
+        <input type="password" class="input_pass" placeholder="密码" />
+        <input type="submit" class="input_sub" value="登 录" />
+      </form>
+    </div>
+  </div>
+
+  <!-- 通过bootstrap添加弹出框 -->
+  <div id = 'myModal' class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          
+        </div>
+      </div>
+    </div>
+  <script>
+    // 1.给登录设置点击事件
+    $('.input_sub').on('click',function(e){
+      e.preventDefault()
+      
+      // 2.获取用户输入的账号和密码
+      var username = $('.input_txt').val().trim();
+      var password = $('.input_pass').val().trim();
+      // 3.判断内容非空
+      if (username == '' || password == ''){
+        $('#myModal').modal();
+        $('.modal-content').text('账号或密码不能为空');
+        return;
+      };
+      // 4.发送请求
+      $.ajax({
+        type : 'post',
+        url : bigNews.login,
+        data : {
+          username : username,
+          password : password
+        },
+        success : function(backData){
+          // 5.正确后跳转到首页
+          // 6.在成功登录后，把token放入本地浏览器的缓存里
+          if(backData.code == 200) {
+            window.localStorage.setItem('token',backData.token)
+            window.location.href = './index.html'
+          }else {
+            $('#myModal').modal();
+            $('.modal-content').text('账号或密码错误');
+          }
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
