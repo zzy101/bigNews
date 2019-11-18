@@ -27,7 +27,7 @@
         <div class="menu">
             <div class="level01 active"><a href="./main_count.html" target="linkIframe"><i
                         class="iconfont icon-yidiandiantubiao04"></i><span>首页</span></a></div>
-            <div class="level01"><a href="./article_list.html" target="linkIframe"><i class="iconfont icon-icon-article"></i><span>文章管理</span><b
+            <div class="level01"><a href="#" target="linkIframe"><i class="iconfont icon-icon-article"></i><span>文章管理</span><b
                         class="iconfont icon-arrowdownl"></b></a></div>
             <ul class="level02">
                 <li><a href="./article_list.html" target="linkIframe"><i class="iconfont icon-previewright"></i><span>文章列表</span></a></li>
@@ -74,44 +74,6 @@
         </div>
       </div>
     <script src="./libs/http.js"></script>
-    <script>
-        // 1.导入htt.js文件
-        // 2.发送请求获取用户信息,渲染到页面
-        // 3.从login页面传入token
-        $.ajax({
-            url : bigNews.admin,
-            success : function(backData) {
-                if(backData.code == 200){
-                    $('.user_info img').attr('src',backData.data.userPic)
-                    $('.user_info > span > i').text(backData.data.nickname)
-                    $('.user_center_link img').attr('src',backData.data.userPic)
-                }
-            }
-        })
-        // 4.点击退出返回到login界面，并且清除token
-        $('.logout').on('click',function(){
-            $('#myModal').modal()
-        })
-        // 5.点击确认返回登录界面
-        $('.btn-tc').on('click',function(){
-            location.href = './login.html'
-            localStorage.removeItem('token')
-        })
-
-
-        // 二.左侧导航栏的高亮显示
-        $('.menu > .level01').on('click',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            if($(this).index() == 1){
-                $(this).find('b').toggleClass('rotate0')
-                $('.level02').slideToggle()
-                $('.level02 li').eq(0).trigger('click')
-            }
-        })
-        // 给ul里的li设置点击事件
-        $('.level02 li').on('click',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-        })
-    </script>
+    <script src="./js/index.js"></script>
 </body>
 </html>
