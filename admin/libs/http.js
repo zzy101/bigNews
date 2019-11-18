@@ -11,6 +11,9 @@
         artice_add : site + '/admin/category/add',      //文章新增
         artice_edit : site + '/admin/category/edit',     //文章编辑
         artice_remover : site + '/admin/category/delete',   //删除文章分类
+        artice_query : site + '/admin/article/query',       //文章搜索
+        artice_search : site + '/admin/article/search',     //文章信息
+        artice_delete : site + '/admin/article/delete',     //删除文章数据
     }
     w.bigNews = bigNews;
 }(window))
